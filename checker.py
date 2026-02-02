@@ -11,6 +11,7 @@ for line in urls:
             print(f"URL {url} is not reachable. Status code: {response.status_code}")
         else:
             print(f"URL {url} is reachable.")
+            print(f"Response time: {response.elapsed.total_seconds()} seconds.")
     except requests.exceptions.RequestException as e:
         print(f"URL {url} is not reachable. Error: {e}")                   
 
