@@ -1,9 +1,10 @@
-import requests, colorama
+import requests, colorama, sys
 
-from colorama import Fore
+from colorama import Fore, init
 
+init(autoreset=True)
 
-urls = open("urls.txt").readlines()
+urls = open(sys.argv[1]).readlines()
 
 for line in urls:
     url = line.strip()
@@ -13,8 +14,8 @@ for line in urls:
         if response.status_code != 200:
             print(Fore.RED + f"URL {url} is not reachable. Status code: {response.status_code}")
         else:
-            print(f"URL {url} is reachable.")
-            print(f"Response time: {response.elapsed.total_seconds()} seconds.")
+            print(Fore.GREEN + f"URL {url} is reachable.")
+            print(Fore.CYAN + f"Response time: {response.elapsed.total_seconds()} seconds.")
     except requests.exceptions.RequestException as e:
-        print(f"URL {url} is not reachable. Error: {e}")                   
+        print(Fore.YELLOW + f"URL {url} is not reachable. Error: {e}")                   
 
