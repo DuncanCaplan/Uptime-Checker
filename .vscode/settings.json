@@ -1,0 +1,23 @@
+{
+  "editor.suggest.enabled": false,
+  "editor.quickSuggestions": {
+    "comments": "off",
+    "strings": "off",
+    "other": "off"
+  },
+  "editor.parameterHints.enabled": false,
+  "editor.acceptSuggestionOnCommitCharacter": false,
+  "editor.acceptSuggestionOnEnter": "off",
+  "editor.wordBasedSuggestions": "off",
+  "[python]": {
+    "editor.suggest.enabled": false,
+    "editor.quickSuggestions": {
+      "comments": "off",
+      "strings": "off",
+      "other": "off"
+    }
+  },
+  "python.analysis.autoImportCompletions": false,
+  "python.linting.enabled": false,
+  "pylance.enable": false
+}
