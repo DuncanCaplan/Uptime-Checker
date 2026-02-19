@@ -1,4 +1,6 @@
-import requests, sys, concurrent.futures
+import requests
+import sys
+import concurrent.futures
 
 from colorama import Fore, init
 
