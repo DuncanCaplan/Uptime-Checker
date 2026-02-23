@@ -53,5 +53,5 @@ def check_url(url):
 with open(sys.argv[1], "r") as urls_file:
     urls = urls_file.readlines()
 
-with concurrent.futures.ThreadPoolExecutor(max_workers = 2) as executor:
+with concurrent.futures.ThreadPoolExecutor(max_workers=2) as executor:
     executor.map(check_url, urls)
