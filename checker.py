@@ -1,6 +1,8 @@
 import requests
 import sys
 import concurrent.futures
+import threading
+import time
 
 from flask import Flask
 
@@ -17,6 +19,57 @@ def home():
 @app.route("/health")
 def health():
     return "Health"
+
+def check_all_urls():
+    file = open("urls.txt", "r")
+
+    urls = file.readlines()
+
+    print(urls)
+
+    for url in urls:
+        url = url.strip()
+
+        try:
+            response = requests.request("GET", url)
+
+            if 200 <= response.status_code < 300:
+                print(
+                    Fore.GREEN
+                    + f"URL {url} is reachable. Status code: {response.status_code}"
+                )
+                print(
+                    Fore.CYAN
+                    + f"Response time: {response.elapsed.total_seconds()} seconds."
+                )
+            elif 300 <= response.status_code < 400:
+                print(Fore.YELLOW + f"URL {url} has been redirected.")
+                print(
+                    Fore.CYAN
+                    + f"Response time: {response.elapsed.total_seconds()} seconds."
+                )
+            elif 400 <= response.status_code < 500:
+                print(
+                    Fore.RED
+                    + f"URL {url} returned a client error status code: {response.status_code}"
+                )
+                print(
+                    Fore.CYAN
+                    + f"Response time: {response.elapsed.total_seconds()} seconds."
+                )
+            elif 500 <= response.status_code < 600:
+                print(
+                    Fore.RED
+                    + f"URL {url} returned a server error status code: {response.status_code}"
+                )
+                print(
+                    Fore.CYAN
+                    + f"Response time: {response.elapsed.total_seconds()} seconds."
+                )
+        except requests.exceptions.RequestException as e:
+            print(Fore.YELLOW + f"URL {url} is not reachable. Error: {e}")
+
+    file.close()
 
 '''
 @app.route("/")
@@ -71,6 +124,7 @@ def uptime_checker():
     with concurrent.futures.ThreadPoolExecutor(max_workers=2) as executor:
         executor.map(check_url, urls)
 '''
+check_all_urls()
 
 if __name__ == "__main__":
     app.run(debug=True)
