@@ -1,22 +1,24 @@
-import requests
 import threading
 import time
 
-from flask import Flask
-
+import requests
 from colorama import Fore, init
+from flask import Flask
 
 app = Flask(__name__)
 
 init(autoreset=True)
 
+
 @app.route("/")
 def home():
     return "OK"
 
+
 @app.route("/health")
 def health():
     return "Health"
+
 
 def check_all_urls():
     file = open("urls.txt", "r")
@@ -24,7 +26,6 @@ def check_all_urls():
     file.close()
 
     while True:
-
         for url in urls:
             url = url.strip()
 
@@ -70,7 +71,7 @@ def check_all_urls():
         time.sleep(30)
 
 
-threading.Thread(target = check_all_urls).start()
+threading.Thread(target=check_all_urls).start()
 
 if __name__ == "__main__":
     app.run(debug=True)
