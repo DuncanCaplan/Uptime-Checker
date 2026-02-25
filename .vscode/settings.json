@@ -19,5 +19,6 @@
   },
   "python.analysis.autoImportCompletions": false,
   "python.linting.enabled": false,
-  "pylance.enable": false
+  "pylance.enable": false,
+  "python-envs.pythonProjects": []
 }
